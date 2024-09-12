@@ -1,8 +1,15 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import style from './Hotel.module.css';
 import hotelImg from '../../assets/images/dsadsa.jpg';
 
-export default function Hotel() {
+const propTypes = {
+	name: PropTypes.string.isRequired,
+	city: PropTypes.string.isRequired,
+	rating: PropTypes.number.isRequired,
+	description: PropTypes.string.isRequired,
+};
+
+export default function Hotel(props) {
 	return (
 		<div className={`${style.hotel} card`}>
 			<div className='card-body'>
@@ -17,13 +24,13 @@ export default function Hotel() {
 					<div className='col-8'>
 						<div className='row'>
 							<div className='col'>
-								<p className={style.title}>Pensjonat</p>
+								<p className={style.title}>{props.name}</p>
 								<span className='badge bg-light text-dark'>
-									Warszawa
+									{props.city}
 								</span>
 							</div>
 							<div className='col'>
-								<h5>Ocena: 8.3</h5>
+								<h5>Ocena: {props.rating}</h5>
 								<a
 									href='#section'
 									className='btn btn-primary mt-2 px-5 float-end'>
@@ -33,13 +40,12 @@ export default function Hotel() {
 						</div>
 					</div>
 					<div className='col-12'>
-						<p className={style.description}>
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Quo facere nulla aut sint, reiciendis nam?
-						</p>
+						<p className={style.description}>{props.description}</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	);
 }
+
+Hotel.propTypes = propTypes;
