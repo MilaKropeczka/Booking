@@ -1,8 +1,12 @@
 .header {
 	height: 50px;
 	background-color: #cdcdcd;
+	background-image: url(../assets/images/header.jpg);
+	background-size: cover;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 20px 15px;
+	padding: 80px 15px;
+	background-position: 0 -20px;
+	background-repeat: no-repeat;
 }
