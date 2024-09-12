@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-export default function Searchbar() {
+export default function Searchbar(props) {
 	const [term, setTerm] = useState('');
 
 	const search = () => {
-		console.log(term);
+		props.onSearch(term);
 	};
+
 	return (
 		<div className='d-flex'>
 			<input
