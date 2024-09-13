@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import ThemeContext from '../../context/themeContext';
 
 export default function Searchbar(props) {
 	const [term, setTerm] = useState('');
+	const theme = useContext(ThemeContext);
 
 	const search = () => {
 		props.onSearch(term);
@@ -17,7 +19,7 @@ export default function Searchbar(props) {
 				type='text'
 				placeholder='Szukaj...'
 			/>
-			<button onClick={search} className='ms-1 btn btn-secondary'>
+			<button onClick={search} className={`ms-1 btn btn-${theme.color}`}>
 				Szukaj
 			</button>
 		</div>
