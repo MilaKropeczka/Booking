@@ -1,19 +1,19 @@
-import PropTypes from 'prop-types';
 import styles from './Header.module.css';
-import Searchbar from './Searchbar/Searchbar';
-
-const propTypes = {
-	onSearch: PropTypes.func.isRequired,
-};
+import withMousePosition from '../hoc/withMousePosition';
 
 function Header(props) {
+	const paralaxStyles = {
+		transform: `translate(${props.mouseX / -20}px, ${
+			props.mouseY / 120
+		}px)`,
+	};
+
 	return (
-		<header className={`${styles.header} container`}>
-			<Searchbar onSearch={props.onSearch} />
+		<header className={`${styles.header}`}>
+			<div className={styles.headerImage} style={paralaxStyles}></div>
+			{props.children}
 		</header>
 	);
 }
 
-Header.propTypes = propTypes;
-
-export default Header;
+export default withMousePosition(Header);
