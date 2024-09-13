@@ -7,6 +7,12 @@
 
 .menuItem {
 	display: inline-block;
+	margin-right: 15px;
+}
+
+.menuItem a {
+	color: #6c757d;
+	text-decoration: none;
 }
 
 .menuContainer {
