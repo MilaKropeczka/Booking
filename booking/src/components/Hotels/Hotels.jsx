@@ -10,7 +10,7 @@ const propTypes = {
 class Hotels extends Component {
 	render() {
 		return (
-			<div className={`${style.container} container`}>
+			<div className={`${style.container}`}>
 				<h2 className={style.title}>Oferty: </h2>
 				{this.props.hotels.map((hotel) => (
 					<Hotel key={hotel.id} {...hotel} />
