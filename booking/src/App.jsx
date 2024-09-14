@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Hotels from './components/Hotels/Hotels';
@@ -35,28 +35,26 @@ const backendHotels = [
 const reducer = (state, action) => {
 	switch (action.type) {
 		case 'change-theme':
+			const theme = state.theme === 'danger' ? 'primary' : 'danger';
 			return {
 				...state,
-				theme: state.theme === 'danger' ? 'primary' : 'danger',
+				theme: theme,
 			};
 		case 'set-hotels':
 			return { ...state, hotels: action.hotels };
 		case 'set-loading':
 			return { ...state, loading: action.hotels };
-		case 'set-isauthenticated':
-			return { ...state, isAuthenticated: action.isAuthenticated };
+		case 'login':
+			return { ...state, isAuthenticated: true };
+		case 'logout':
+			return { ...state, isAuthenticated: false };
 
 		default:
-		// return: state
-		// throw new Error('Nie ma takiej akcji: ', action.type);
+			throw new Error('Nie ma takiej akcji: ' + action.type);
 	}
 };
 
 function App() {
-	// const [hotels, setHotels] = useState([]);
-	// const [loading, setLoading] = useState(true);
-	// const [isAuthenticated, setIsAuthenticated] = useState(false);
-	// const [theme, setTheme] = useState('danger');
 	const initialState = {
 		theme: 'danger',
 		hotels: [],
@@ -66,24 +64,15 @@ function App() {
 
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-	const changeTheme = () => {
-		// const newTheme = theme === 'primary' ? 'danger' : 'primary';
-		// setTheme(newTheme);
-		dispatch({ type: 'change-theme' });
-	};
-
 	const searchHandler = (term) => {
 		const newHotels = [...backendHotels].filter((hotel) =>
 			hotel.name.toLowerCase().includes(term.toLowerCase())
 		);
-		// setHotels(newHotels);
 		dispatch({ type: 'set-hotels', hotels: newHotels });
 	};
 
 	useEffect(() => {
 		setTimeout(() => {
-			// setHotels(backendHotels);
-			// setLoading(false);
 			dispatch({ type: 'set-hotels', hotels: backendHotels });
 			dispatch({ type: 'set-loading', loading: false });
 		}, 1000);
@@ -96,7 +85,7 @@ function App() {
 		</Header>
 	);
 	const content = state.loading ? (
-		<LoadingIcon theme={changeTheme} />
+		<LoadingIcon />
 	) : (
 		<Hotels hotels={state.hotels} />
 	);
@@ -106,23 +95,21 @@ function App() {
 		<AuthContext.Provider
 			value={{
 				isAuthenticated: state.isAuthenticated,
-				// login: () => setIsAuthenticated(true),
 				login: () =>
 					dispatch({
-						type: 'set-isauthenticated',
+						type: 'login',
 						isAuthenticated: true,
 					}),
-				// logout: () => setIsAuthenticated(false),
 				logout: () =>
 					dispatch({
-						type: 'set-isauthenticated',
+						type: 'logout',
 						isAuthenticated: false,
 					}),
 			}}>
 			<ThemeContext.Provider
 				value={{
 					color: state.theme,
-					changeTheme: changeTheme,
+					changeTheme: () => dispatch({ type: 'change-theme' }),
 				}}>
 				<div className='App'>
 					<Layout
