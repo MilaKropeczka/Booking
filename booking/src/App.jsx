@@ -102,7 +102,8 @@ function App() {
 		<LoadingIcon />
 	) : (
 		<>
-			<BestHotel getHotel={getBestHotel} />
+			{/* odmontowanie componentu */}
+			{getBestHotel() ? <BestHotel getHotel={getBestHotel} /> : null}
 			<Hotels hotels={state.hotels} />
 		</>
 	);
