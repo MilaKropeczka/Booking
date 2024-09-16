@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useCallback } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Hotels from './components/Hotels/Hotels';
@@ -72,7 +72,8 @@ function App() {
 		dispatch({ type: 'set-hotels', hotels: newHotels });
 	};
 
-	const getBestHotel = () => {
+	const getBestHotel = useCallback(() => {
+		//funkcja bedzie sie wykonywać tylko wtedy kiedy zmieni się state hoteli, optymalizuje (useMemo do wartosci/useCallback do funkcji)
 		if (state.hotels.length < 2) {
 			return null;
 		} else {
@@ -80,7 +81,7 @@ function App() {
 				a.rating > b.rating ? -1 : 1
 			)[0];
 		}
-	};
+	}, [state.hotels]);
 
 	useEffect(() => {
 		setTimeout(() => {
