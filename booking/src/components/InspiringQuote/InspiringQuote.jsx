@@ -23,6 +23,7 @@ export default function InspiringQuote(props) {
 	}, []);
 
 	useLayoutEffect(() => {
+		/// nie widać przeskoku  wczytywania backendu z "wczytywanie cytatów..."
 		setQuote(quotes[0]);
 	}, [loading]);
 
