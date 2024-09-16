@@ -7,9 +7,15 @@
 
 .menuItem {
 	display: inline-block;
+	margin-right: 15px;
+}
+
+.menuItem a {
+	color: #6c757d;
+	text-decoration: none;
 }
 
 .menuContainer {
 	border: 1px solid #cdcdcd;
-	margin: 10px 0;
+	margin: 10px auto;
 }

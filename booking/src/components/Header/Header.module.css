@@ -1,8 +1,23 @@
 .header {
 	height: 50px;
-	background-color: #cdcdcd;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 20px 15px;
+	padding: 80px 15px;
+	background-position: 0 -20px;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	position: relative;
+}
+
+.headerImage {
+	background-color: #cdcdcd;
+	background-image: url(../assets/images/header.jpg);
+	background-size: 110%;
+	position: absolute;
+	top: -5%;
+	left: -5%;
+	bottom: -5%;
+	right: -5%;
+	z-index: -1;
 }
