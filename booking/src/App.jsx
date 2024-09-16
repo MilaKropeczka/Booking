@@ -10,6 +10,7 @@ import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './components/context/themeContext';
 import AuthContext from './components/context/authContext';
+import BestHotel from './components/Hotels/BestHotel/BestHotel';
 
 const backendHotels = [
 	{
@@ -87,7 +88,10 @@ function App() {
 	const content = state.loading ? (
 		<LoadingIcon />
 	) : (
-		<Hotels hotels={state.hotels} />
+		<>
+			<BestHotel />
+			<Hotels hotels={state.hotels} />
+		</>
 	);
 	const menu = <Menu />;
 	const footer = <Footer />;
