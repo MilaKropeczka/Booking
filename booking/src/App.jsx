@@ -72,6 +72,16 @@ function App() {
 		dispatch({ type: 'set-hotels', hotels: newHotels });
 	};
 
+	const getBestHotel = () => {
+		if (state.hotels.length < 2) {
+			return null;
+		} else {
+			return state.hotels.sort((a, b) =>
+				a.rating > b.rating ? -1 : 1
+			)[0];
+		}
+	};
+
 	useEffect(() => {
 		setTimeout(() => {
 			dispatch({ type: 'set-hotels', hotels: backendHotels });
@@ -89,7 +99,7 @@ function App() {
 		<LoadingIcon />
 	) : (
 		<>
-			<BestHotel />
+			<BestHotel getHotel={getBestHotel} />
 			<Hotels hotels={state.hotels} />
 		</>
 	);
