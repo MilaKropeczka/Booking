@@ -11,6 +11,7 @@ import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './components/context/themeContext';
 import AuthContext from './components/context/authContext';
 import BestHotel from './components/Hotels/BestHotel/BestHotel';
+import InspiringQuote from './components/InspiringQuote/InspiringQuote';
 
 const backendHotels = [
 	{
@@ -92,6 +93,7 @@ function App() {
 
 	const header = (
 		<Header>
+			<InspiringQuote />
 			<Searchbar onSearch={(term) => searchHandler(term)} />
 			<ThemeButton />
 		</Header>
