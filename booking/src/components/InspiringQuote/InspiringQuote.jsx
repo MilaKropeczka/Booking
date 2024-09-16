@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 
 const quotes = ['cytat 1', 'cytat2', 'cytat3', 'cytat4'];
 
@@ -23,7 +22,7 @@ export default function InspiringQuote(props) {
 		setLoading(false);
 	}, []);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		setQuote(quotes[0]);
 	}, [loading]);
 
