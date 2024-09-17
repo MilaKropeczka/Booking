@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import moment from 'moment';
 
 export default function BestHotel(props) {
 	const endTime = moment().add(23, 'minutes').add(34, 'seconds');
 	const [time, setTime] = useState('');
 	const hotel = props.getHotel();
-	let interval = null;
+	// let interval = null;
+	const intervalRef = useRef(null);
 
 	useEffect(() => {
-		interval = setInterval(() => {
+		intervalRef.current = setInterval(() => {
 			const leftTime = -moment().diff(endTime) / 1000;
 			const minutes = Math.floor(leftTime / 60);
 			const seconds = Math.floor(leftTime % 60);
 			setTime(`minut: ${minutes}, sekund: ${seconds}`);
-			console.log(leftTime);
 		}, 1000);
 
 		//componentWillUnmount()  //odwołuje czas jak już odmontowano component
 		return () => {
-			clearInterval(interval);
+			clearInterval(intervalRef.current);
 		};
 	}, []);
 
