@@ -12,6 +12,7 @@ import ThemeContext from './components/context/themeContext';
 import AuthContext from './components/context/authContext';
 import BestHotel from './components/Hotels/BestHotel/BestHotel';
 import InspiringQuote from './components/InspiringQuote/InspiringQuote';
+import useStateStorage from './components/hooks/useStateStorage';
 
 const backendHotels = [
 	{
@@ -55,16 +56,16 @@ const reducer = (state, action) => {
 			throw new Error('Nie ma takiej akcji: ' + action.type);
 	}
 };
+const initialState = {
+	theme: 'danger',
+	hotels: [],
+	loading: true,
+	isAuthenticated: true,
+};
 
 function App() {
-	const initialState = {
-		theme: 'danger',
-		hotels: [],
-		loading: true,
-		isAuthenticated: true,
-	};
-
 	const [state, dispatch] = useReducer(reducer, initialState);
+	const [storage, setStorage] = useStateStorage('klucz', 'wartość startowa');
 
 	const searchHandler = (term) => {
 		const newHotels = [...backendHotels].filter((hotel) =>
@@ -102,6 +103,12 @@ function App() {
 		<LoadingIcon />
 	) : (
 		<>
+			{storage}
+			<input
+				type='text'
+				value={storage}
+				onChange={(e) => setStorage(e.target.value)}
+			/>
 			{/* odmontowanie componentu */}
 			{getBestHotel() ? <BestHotel getHotel={getBestHotel} /> : null}
 			<Hotels hotels={state.hotels} />
