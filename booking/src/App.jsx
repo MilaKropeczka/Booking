@@ -13,6 +13,7 @@ import AuthContext from './components/context/authContext';
 import BestHotel from './components/Hotels/BestHotel/BestHotel';
 import InspiringQuote from './components/InspiringQuote/InspiringQuote';
 import LastHotel from './components/Hotels/LastHotel/LastHotel';
+import useStateStorage from './components/hooks/useStateStorage';
 
 const backendHotels = [
 	{
@@ -64,6 +65,7 @@ const initialState = {
 };
 
 function App() {
+	const [lastHotel, setLastHotel] = useStateStorage(null);
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	const searchHandler = (term) => {
@@ -84,6 +86,9 @@ function App() {
 		}
 	}, [state.hotels]);
 
+	const openHotel = (hotel) => setLastHotel(hotel);
+	const removeLastHotel = () => setLastHotel(null);
+
 	useEffect(() => {
 		setTimeout(() => {
 			dispatch({ type: 'set-hotels', hotels: backendHotels });
@@ -102,10 +107,12 @@ function App() {
 		<LoadingIcon />
 	) : (
 		<>
-			<LastHotel />
+			{lastHotel ? (
+				<LastHotel {...lastHotel} onRemove={removeLastHotel} />
+			) : null}
 			{/* odmontowanie componentu */}
 			{getBestHotel() ? <BestHotel getHotel={getBestHotel} /> : null}
-			<Hotels hotels={state.hotels} />
+			<Hotels onOpen={openHotel} hotels={state.hotels} />
 		</>
 	);
 	const menu = <Menu />;

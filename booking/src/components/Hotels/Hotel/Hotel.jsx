@@ -15,6 +15,12 @@ const propTypes = {
 export default function Hotel(props) {
 	const [auth] = useAuth();
 	const theme = useContext(ThemeContext);
+
+	const clickHandler = (e) => {
+		e.preventDefault();
+		props.onOpen(props);
+	};
+
 	return (
 		<div className={`${style.hotel} card`}>
 			<div className='card-body'>
@@ -37,6 +43,7 @@ export default function Hotel(props) {
 							<div className='col'>
 								<h5>Ocena: {props.rating}</h5>
 								<a
+									onClick={clickHandler}
 									href='#section'
 									className={`btn btn-${theme.color} mt-2 px-5 float-end`}>
 									Pokaż
