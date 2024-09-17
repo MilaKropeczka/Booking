@@ -9,9 +9,6 @@ const propTypes = {
 };
 
 function Hotels(props) {
-	useEffect(() => {
-		console.log('object');
-	}); //calkowite usuniecie drugiego parametru pokazuje odswiezanie komponentu
 	return (
 		<div className={`${style.container}`}>
 			<h2 className={style.title}>Oferty: </h2>

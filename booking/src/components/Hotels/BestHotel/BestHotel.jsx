@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import moment from 'moment';
 
 export default function BestHotel(props) {
+	const endTime = moment().add(23, 'minutes').add(34, 'seconds');
+	const [time, setTime] = useState('');
 	const hotel = props.getHotel();
-	if (!hotel) return null;
+	// let interval = null;
+	const intervalRef = useRef(null);
+
+	useEffect(() => {
+		intervalRef.current = setInterval(() => {
+			const leftTime = -moment().diff(endTime) / 1000;
+			const minutes = Math.floor(leftTime / 60);
+			const seconds = Math.floor(leftTime % 60);
+			setTime(`minut: ${minutes}, sekund: ${seconds}`);
+		}, 1000);
+
+		//componentWillUnmount()  //odwołuje czas jak już odmontowano component
+		return () => {
+			clearInterval(intervalRef.current);
+		};
+	}, []);
+
+	// if (!hotel) return null;
 
 	return (
 		<div className='card bg-success text-white'>
@@ -12,6 +32,7 @@ export default function BestHotel(props) {
 					<h5 className='card-title'>{hotel.name}</h5>{' '}
 					<p>Ocena: {hotel.rating}</p>
 				</div>
+				<p>Do końca oferty pozostało: {time}</p>
 				<a href='#section' className='btn btn-sm btn-light'>
 					Pokaż
 				</a>
