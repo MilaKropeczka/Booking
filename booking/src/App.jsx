@@ -61,7 +61,7 @@ function App() {
 		theme: 'danger',
 		hotels: [],
 		loading: true,
-		isAuthenticated: false,
+		isAuthenticated: true,
 	};
 
 	const [state, dispatch] = useReducer(reducer, initialState);
