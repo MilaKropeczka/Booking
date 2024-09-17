@@ -3,6 +3,7 @@ import style from './Hotel.module.css';
 import hotelImg from '../../assets/images/dsadsa.jpg';
 import ThemeContext from '../../context/themeContext';
 import { useContext } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 const propTypes = {
 	name: PropTypes.string.isRequired,
@@ -12,6 +13,7 @@ const propTypes = {
 };
 
 export default function Hotel(props) {
+	const [auth] = useAuth();
 	const theme = useContext(ThemeContext);
 	return (
 		<div className={`${style.hotel} card`}>
@@ -46,6 +48,11 @@ export default function Hotel(props) {
 						<p className={style.description}>{props.description}</p>
 					</div>
 				</div>
+				{auth ? (
+					<p className='mt-2'>Dostępność: 4 pokoje</p>
+				) : (
+					<p className='mt-2'>Dostępność: zaloguj</p>
+				)}
 			</div>
 		</div>
 	);
