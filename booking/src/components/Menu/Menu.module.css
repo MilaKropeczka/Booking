@@ -15,6 +15,10 @@
 	text-decoration: none;
 }
 
+.menuItemActive {
+	text-decoration: underline;
+}
+
 .menuContainer {
 	border: 1px solid #cdcdcd;
 	margin: 10px auto;

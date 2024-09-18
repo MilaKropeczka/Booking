@@ -14,50 +14,26 @@ import InspiringQuote from './components/InspiringQuote/InspiringQuote';
 import { reducer, initialState } from './reducer';
 import Home from './components/pages/Home/Home';
 import Hotel from './components/pages/Hotel/Hotel';
-
-const backendHotels = [
-	{
-		id: 1,
-		name: 'Pod akacjami',
-		city: 'Warszawa',
-		rating: 8.3,
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad totam quos reiciendis sequi magni possimus, perspiciatis dignissimos repellendus commodi cumque.',
-		image: '',
-	},
-	{
-		id: 2,
-		name: 'Dębowy',
-		city: 'Lublin',
-		rating: 8.8,
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad totam quos reiciendis sequi magni possimus, perspiciatis dignissimos repellendus commodi cumque.',
-		image: '',
-	},
-];
+import Search from './components/pages/Search/Search';
+import Profile from './components/pages/Profile/Profile';
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-	const searchHandler = (term) => {
-		const newHotels = [...backendHotels].filter((hotel) =>
-			hotel.name.toLowerCase().includes(term.toLowerCase())
-		);
-		dispatch({ type: 'set-hotels', hotels: newHotels });
-	};
-
 	const header = (
 		<Header>
 			<InspiringQuote />
-			<Searchbar onSearch={(term) => searchHandler(term)} />
+			<Searchbar />
 			<ThemeButton />
 		</Header>
 	);
 	const content = (
 		<>
 			<Routes>
-				<Route path='/' element={<Home />} />
 				<Route path='/hotele/:id' element={<Hotel />} />
+				<Route path='/wyszukaj/:term' element={<Search />} />
+				<Route path='/profil' element={<Profile />} />
+				<Route path='/' element={<Home />} />
 			</Routes>
 		</>
 	);
