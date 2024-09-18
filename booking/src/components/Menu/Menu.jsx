@@ -22,7 +22,7 @@ function Menu() {
 					<NavLink
 						to='/'
 						className={({ isActive }) =>
-							isActive ? 'menuItemActive' : ''
+							isActive ? style.menuItemActive : ''
 						}>
 						Home
 					</NavLink>
@@ -33,7 +33,7 @@ function Menu() {
 							<NavLink
 								to='/profil'
 								className={({ isActive }) =>
-									isActive ? 'menuItemActive' : ''
+									isActive ? style.menuItemActive : ''
 								}>
 								Mój profil
 							</NavLink>
