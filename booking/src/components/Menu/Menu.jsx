@@ -1,5 +1,6 @@
 import style from './Menu.module.css';
 import useAuth from '../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 function Menu() {
 	const [auth, setAuth] = useAuth();
@@ -18,7 +19,7 @@ function Menu() {
 			className={`${style.menuContainer} breadcrumb p-3 bg-secondary-subtle border border-dark-subtle rounded-2`}>
 			<ul className={`${style.menu}`}>
 				<li className={`${style.menuItem}`}>
-					<a href='#section'>Home</a>
+					<Link to='/'>Home</Link>
 				</li>
 				<li className={style.menuItem}>
 					{' '}
