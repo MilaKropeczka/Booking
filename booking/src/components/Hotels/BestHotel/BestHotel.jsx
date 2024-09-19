@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 export default function BestHotel(props) {
 	const endTime = moment().add(23, 'minutes').add(34, 'seconds');
@@ -16,13 +17,10 @@ export default function BestHotel(props) {
 			setTime(`minut: ${minutes}, sekund: ${seconds}`);
 		}, 1000);
 
-		//componentWillUnmount()  //odwołuje czas jak już odmontowano component
 		return () => {
 			clearInterval(intervalRef.current);
 		};
 	}, []);
-
-	// if (!hotel) return null;
 
 	return (
 		<div className='card bg-success text-white'>
@@ -33,9 +31,11 @@ export default function BestHotel(props) {
 					<p>Ocena: {hotel.rating}</p>
 				</div>
 				<p>Do końca oferty pozostało: {time}</p>
-				<a href='#section' className='btn btn-sm btn-light'>
+				<Link
+					to={`/hotele/${hotel.id}`}
+					className='btn btn-sm btn-light'>
 					Pokaż
-				</a>
+				</Link>
 			</div>
 		</div>
 	);

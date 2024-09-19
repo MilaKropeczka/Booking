@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
 import LoadingIcon from '../../UI/LoadingIcon/LoadingIcon';
+import useWebsiteTitle from '../../hooks/useWebsiteTitle';
 
 export default function Hotel() {
 	// const params = useParams(); //dane z linku, np params.id
 	const [hotel, setHotel] = useState({});
 	const [loading, setLoading] = useState(true);
+
+	const setTitle = useWebsiteTitle('Hotel - Dębowy');
 
 	const fetchHotel = () => {
 		setHotel({
@@ -17,6 +20,7 @@ export default function Hotel() {
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad totam quos reiciendis sequi magni possimus, perspiciatis dignissimos repellendus commodi cumque.',
 			image: '',
 		});
+		setTitle();
 		setLoading(false);
 	};
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LastHotel(props) {
 	if (!props) return null;
@@ -18,9 +19,11 @@ export default function LastHotel(props) {
 				<div
 					style={{ width: '100px' }}
 					className='ms-auto d-flex justify-content-between'>
-					<a href='#section' className='btn btn-sm btn-dark'>
+					<Link
+						to={`/hotele/${props.id}`}
+						className='btn btn-sm btn-dark'>
 						Tak!
-					</a>
+					</Link>
 					<button
 						href='#section'
 						onClick={props.onRemove}

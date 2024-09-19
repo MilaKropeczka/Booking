@@ -1,14 +1,18 @@
+import { useContext, lazy, Suspense } from 'react';
 import { Navigate } from 'react-router-dom';
-import Profile from '../pages/Profile/Profile';
 import ReducerContext from '../context/reducerContext';
-import { useContext } from 'react';
+const Profile = lazy(() => import('../pages/Profile/Profile'));
 
 const AuthenticatedRoute = () => {
 	const reducer = useContext(ReducerContext);
 	if (!reducer.state.isAuthenticated) {
 		return <Navigate to='/zaloguj' />;
 	}
-	return <Profile />;
+	return (
+		<Suspense fallback={<p>Ładowanie...</p>}>
+			<Profile />
+		</Suspense>
+	);
 };
 
 export default AuthenticatedRoute;
