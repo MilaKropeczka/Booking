@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -15,9 +15,11 @@ import { reducer, initialState } from './reducer';
 import Home from './components/pages/Home/Home';
 import Hotel from './components/pages/Hotel/Hotel';
 import Search from './components/pages/Search/Search';
-import Profile from './components/pages/Profile/Profile';
 import ProfileDetails from './components/pages/Profile/ProfileDetails/ProfileDetails';
 import MyHotels from './components/pages/Profile/MyHotels/MyHotels';
+import NotFound from './components/pages/404/404';
+import Login from './components/pages/Auth/Login';
+import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute';
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -33,12 +35,14 @@ function App() {
 		<>
 			<Routes>
 				<Route path='/hotele/:id' element={<Hotel />} />
-				<Route path='/wyszukaj/:term' element={<Search />} />
-				<Route path='/profil/' element={<Profile />}>
+				<Route path='/wyszukaj/:term?' element={<Search />} />
+				<Route path='/profil' element={<AuthenticatedRoute />}>
 					<Route path='' element={<ProfileDetails />} />
 					<Route path='hotele' element={<MyHotels />} />
 				</Route>
-				<Route path='/' element={<Home />} />
+				<Route path='/zaloguj' element={<Login />} />
+				<Route path='/' element={<Home />} end />
+				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>
 	);

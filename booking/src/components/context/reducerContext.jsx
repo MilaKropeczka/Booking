@@ -5,5 +5,4 @@ const ReducerContext = React.createContext({
 	dispatch: () => {},
 });
 
-ReducerContext.displayName = 'AuthContext';
 export default ReducerContext;
