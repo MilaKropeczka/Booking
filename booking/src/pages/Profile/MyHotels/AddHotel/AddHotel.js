@@ -26,19 +26,6 @@ export default function AddHotel() {
 		}, 500);
 	};
 
-	function changeFeatureHandler(e) {
-		const value = e.target.value;
-		const isChecked = e.target.checked;
-
-		if (isChecked) {
-			const newFeatures = [...form.features, value];
-			setForm({ ...form, features: newFeatures });
-		} else {
-			const newFeatures = form.features.filter((x) => x !== value);
-			setForm({ ...form, features: newFeatures });
-		}
-	}
-
 	return (
 		<div className='card'>
 			<div className='card-header'>Nowy hotel</div>
@@ -82,113 +69,49 @@ export default function AddHotel() {
 						error=''
 						showError={false}
 					/>
-
-					{/* <div className='form-group col-md-6 col-xl-4'>
-						<label>Ilość pokoi</label>
-						<select
-							value={form.rooms}
-							onChange={(e) =>
-								setForm({ ...form, rooms: e.target.value })
-							}
-							className='form-control'>
-							<option value='1'>1</option>
-							<option value='2'>2</option>
-							<option value='3'>3</option>
-							<option value='4'>4</option>
-						</select>
-						<div className='invalid-feedback'>Błąd</div>
-					</div> */}
 					<br />
 
-					<div className='form-group col-md-6 col-xl-4'>
-						<h3>Udogodnienia</h3>
-
-						<div className='form-check'>
-							<input
-								className='form-check-input'
-								type='checkbox'
-								value='wifi'
-								checked={form.features.find(
-									(x) => x === 'wifi'
-								)}
-								onChange={changeFeatureHandler}
-							/>
-							<label className='form-check-label' htmlFor='wifi'>
-								Wi-fi
-							</label>
-						</div>
-
-						<div className='form-check'>
-							<input
-								className='form-check-input'
-								type='checkbox'
-								value='tv'
-								checked={form.features.find((x) => x === 'tv')}
-								onChange={changeFeatureHandler}
-							/>
-							<label className='form-check-label' htmlFor='tv'>
-								TV
-							</label>
-						</div>
-
-						<div className='form-check'>
-							<input
-								className='form-check-input'
-								type='checkbox'
-								value='parking'
-								checked={form.features.find(
-									(x) => x === 'parking'
-								)}
-								onChange={changeFeatureHandler}
-							/>
-							<label
-								className='form-check-label'
-								htmlFor='parking'>
-								Parking
-							</label>
-						</div>
-					</div>
+					<Input
+						label='Udogodnienia'
+						type='checkbox'
+						selectedValues={form.features}
+						onChange={(values) =>
+							setForm({ ...form, features: values })
+						}
+						options={[
+							{ value: 'wifi', label: 'Wi-fi' },
+							{ value: 'tv', label: 'TV' },
+							{ value: 'parking', label: 'Parking' },
+						]}
+						error=''
+						showError={false}
+					/>
 					<br />
 
-					<div className='form-group col-md-6 col-xl-4'>
-						<h3>Zdjęcie</h3>
-						<input
-							type='file'
-							onChange={(e) =>
-								setForm({ ...form, image: e.target.files })
-							}
-							ref={imageRef}
-						/>
-					</div>
+					<Input
+						label='Zdjęcie'
+						type='file'
+						onChange={(files) => setForm({ ...form, image: files })}
+						error=''
+						showError={false}
+					/>
+
 					<br />
 
-					<h3>Status</h3>
-					<div className='form-check'>
-						<input
-							className='form-check-input'
-							type='radio'
-							name='status'
-							value='1'
-							onChange={(e) =>
-								setForm({ ...form, status: e.target.value })
-							}
-							checked={form.status === 1}
-						/>
-						<label className='form-check-label'>Aktywny</label>
-					</div>
-					<div className='form-check'>
-						<input
-							className='form-check-input'
-							type='radio'
-							value='0'
-							onChange={(e) =>
-								setForm({ ...form, status: e.target.value })
-							}
-							name='status'
-							checked={form.status === 0}
-						/>
-						<label className='form-check-label'>Ukryty</label>
-					</div>
+					<Input
+						label='Status'
+						type='radio'
+						selectedValue={form.status}
+						onChange={(value) =>
+							setForm({ ...form, status: value })
+						}
+						options={[
+							{ value: '1', label: 'Aktywny' },
+							{ value: '0', label: 'Ukryty' },
+						]}
+						error=''
+						showError={false}
+					/>
 					<br />
 					<div className='text-end col-md-6 col-xl-4'>
 						<LoadingButton
