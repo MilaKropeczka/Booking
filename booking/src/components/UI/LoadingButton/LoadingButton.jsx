@@ -2,7 +2,8 @@ import React from 'react';
 
 export default function LoadingButton(props) {
 	const className = props.className || 'btn-primary';
-
+	const buttonProps = { ...props };
+	delete buttonProps.loading;
 	return props.loading ? (
 		<button class={`btn ${className} mt-3`} type='button' disabled>
 			<span
@@ -12,7 +13,7 @@ export default function LoadingButton(props) {
 			<span class='sr-only'> Ładowanie...</span>
 		</button>
 	) : (
-		<button {...props} className={`btn ${className} mt-3`}>
+		<button {...buttonProps} className={`btn ${className} mt-3`}>
 			{props.children}
 		</button>
 	);

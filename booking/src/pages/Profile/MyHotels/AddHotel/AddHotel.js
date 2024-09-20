@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import LoadingButton from '../../../../components/UI/LoadingButton/LoadingButton';
+import Input from '../../../../components/Input/Input';
 
 export default function AddHotel() {
 	const imageRef = useRef();
@@ -44,54 +45,45 @@ export default function AddHotel() {
 			<div className='card-body'>
 				<p className='text-muted'>Uzupełnij dane hotelu</p>
 				<form onSubmit={sumbit}>
-					<div className='form-group col-md-6 col-xl-4'>
-						<label>Nazwa</label>
-						<input
-							value={form.name}
-							onChange={(e) =>
-								setForm({ ...form, name: e.target.value })
-							}
-							type='text'
-							className={`form-control ${
-								false ? 'is-invalid' : ''
-							}`}
-						/>
-						<div className='invalid-feedback'>Błąd</div>
-					</div>
-					<div className='form-group col-md-6 col-xl-4'>
-						<label>Opis</label>
-						<textarea
-							value={form.description}
-							onChange={(e) =>
-								setForm({
-									...form,
-									description: e.target.value,
-								})
-							}
-							type='text'
-							className={`form-control ${
-								false ? 'is-invalid' : ''
-							}`}
-						/>
-						<div className='invalid-feedback'>Błąd</div>
-					</div>
+					<Input
+						label='Nazwa'
+						value={form.name}
+						onChange={(value) => setForm({ ...form, name: value })}
+						error=''
+						showError={false}
+					/>
+					<Input
+						label='Opis'
+						value={form.description}
+						onChange={(value) =>
+							setForm({ ...form, description: value })
+						}
+						error=''
+						showError={false}
+					/>
+					<Input
+						label='Miejscowość'
+						value={form.city}
+						onChange={(value) => setForm({ ...form, city: value })}
+						error=''
+						showError={false}
+					/>
+					<Input
+						label='Ilość pokoi'
+						type='select'
+						value={form.rooms}
+						onChange={(value) => setForm({ ...form, rooms: value })}
+						options={[
+							{ value: 1, label: 1 },
+							{ value: 2, label: 2 },
+							{ value: 3, label: 3 },
+							{ value: 4, label: 4 },
+						]}
+						error=''
+						showError={false}
+					/>
 
-					<div className='form-group col-md-6 col-xl-4'>
-						<label>Miejscowość</label>
-						<input
-							type='text'
-							onChange={(e) =>
-								setForm({ ...form, city: e.target.value })
-							}
-							value={form.city}
-							className={`form-control ${
-								false ? 'is-invalid' : ''
-							}`}
-						/>
-						<div className='invalid-feedback'>Błąd</div>
-					</div>
-
-					<div className='form-group col-md-6 col-xl-4'>
+					{/* <div className='form-group col-md-6 col-xl-4'>
 						<label>Ilość pokoi</label>
 						<select
 							value={form.rooms}
@@ -105,7 +97,7 @@ export default function AddHotel() {
 							<option value='4'>4</option>
 						</select>
 						<div className='invalid-feedback'>Błąd</div>
-					</div>
+					</div> */}
 					<br />
 
 					<div className='form-group col-md-6 col-xl-4'>
@@ -113,7 +105,7 @@ export default function AddHotel() {
 
 						<div className='form-check'>
 							<input
-								class='form-check-input'
+								className='form-check-input'
 								type='checkbox'
 								value='wifi'
 								checked={form.features.find(
@@ -121,27 +113,27 @@ export default function AddHotel() {
 								)}
 								onChange={changeFeatureHandler}
 							/>
-							<label class='form-check-label' for='wifi'>
+							<label className='form-check-label' htmlFor='wifi'>
 								Wi-fi
 							</label>
 						</div>
 
 						<div className='form-check'>
 							<input
-								class='form-check-input'
+								className='form-check-input'
 								type='checkbox'
 								value='tv'
 								checked={form.features.find((x) => x === 'tv')}
 								onChange={changeFeatureHandler}
 							/>
-							<label class='form-check-label' for='tv'>
+							<label className='form-check-label' htmlFor='tv'>
 								TV
 							</label>
 						</div>
 
 						<div className='form-check'>
 							<input
-								class='form-check-input'
+								className='form-check-input'
 								type='checkbox'
 								value='parking'
 								checked={form.features.find(
@@ -149,7 +141,9 @@ export default function AddHotel() {
 								)}
 								onChange={changeFeatureHandler}
 							/>
-							<label class='form-check-label' for='parking'>
+							<label
+								className='form-check-label'
+								htmlFor='parking'>
 								Parking
 							</label>
 						</div>
@@ -188,7 +182,7 @@ export default function AddHotel() {
 							type='radio'
 							value='0'
 							onChange={(e) =>
-								setForm({ ...form, name: e.status.value })
+								setForm({ ...form, status: e.target.value })
 							}
 							name='status'
 							checked={form.status === 0}
