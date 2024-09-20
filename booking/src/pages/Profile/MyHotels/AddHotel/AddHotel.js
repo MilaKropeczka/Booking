@@ -41,6 +41,7 @@ export default function AddHotel() {
 					/>
 					<Input
 						label='Opis'
+						type='textarea'
 						value={form.description}
 						onChange={(value) =>
 							setForm({ ...form, description: value })

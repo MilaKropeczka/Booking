@@ -4,6 +4,7 @@ import InputText from './InputText/InputText';
 import InputCheckbox from './InputCheckbox/InputCheckbox';
 import InputFile from './InputFile/InputFile';
 import InputRadio from './InputRadio/InputRadio';
+import InputTextarea from './InputTextarea/InputTextarea';
 
 export default function Input({ type = 'text', ...props }) {
 	switch (type) {
@@ -15,6 +16,8 @@ export default function Input({ type = 'text', ...props }) {
 			return <InputFile {...props} />;
 		case 'radio':
 			return <InputRadio {...props} />;
+		case 'textarea':
+			return <InputTextarea {...props} />;
 		case 'text':
 			return <InputText {...props} />;
 		default:
