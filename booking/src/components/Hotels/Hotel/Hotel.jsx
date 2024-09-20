@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import style from './Hotel.module.css';
-import hotelImg from '../../assets/images/dsadsa.jpg';
-import ThemeContext from '../../context/themeContext';
+import hotelImg from '../../../assets/images/dsadsa.jpg';
+import ThemeContext from '../../../context/themeContext';
 import { useContext } from 'react';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router-dom';
 
 const propTypes = {

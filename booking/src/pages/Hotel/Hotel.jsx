@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-import LoadingIcon from '../../UI/LoadingIcon/LoadingIcon';
+import LoadingIcon from '../../components/UI/LoadingIcon/LoadingIcon';
 import useWebsiteTitle from '../../hooks/useWebsiteTitle';
 
 export default function Hotel() {
-	// const params = useParams(); //dane z linku, np params.id
 	const [hotel, setHotel] = useState({});
 	const [loading, setLoading] = useState(true);
 

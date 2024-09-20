@@ -1,4 +1,4 @@
-import withClass from '../hoc/withClass';
+import withClass from '../../hoc/withClass';
 
 function Layout(props) {
 	return (

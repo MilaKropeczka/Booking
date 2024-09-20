@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import LoadingButton from '../../../UI/LoadingButton/LoadingButton';
+import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import { validateEmail } from '../../../helpers/validations';
 
 export default function ProfileDetails() {
@@ -26,13 +26,6 @@ export default function ProfileDetails() {
 			setLoading(false);
 		}, 500);
 	};
-	// {
-	// 	valid === false ? (
-	// 		<div className='alert alert-danger'>
-	// 			Niepoprawne dane logowania
-	// 		</div>
-	// 	) : null;
-	// }
 
 	useEffect(() => {
 		if (validateEmail(email)) {

@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import LastHotel from '../../Hotels/LastHotel/LastHotel';
-import BestHotel from '../../Hotels/BestHotel/BestHotel';
-import Hotels from '../../Hotels/Hotels';
+import LastHotel from '../../components/Hotels/LastHotel/LastHotel';
+import BestHotel from '../..//components/Hotels/BestHotel/BestHotel';
+import Hotels from '../../components/Hotels/Hotels';
 import useStateStorage from '../../hooks/useStateStorage';
 import useWebsiteTitle from '../../hooks/useWebsiteTitle';
-import LoadingIcon from '../../UI/LoadingIcon/LoadingIcon';
+import LoadingIcon from '../../components/UI/LoadingIcon/LoadingIcon';
 
 const backendHotels = [
 	{

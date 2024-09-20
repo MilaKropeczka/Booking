@@ -7,20 +7,26 @@ import Searchbar from './components/UI/Searchbar/Searchbar';
 import Layout from './components/Layout/Layout';
 import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
-import ThemeContext from './components/context/themeContext';
-import AuthContext from './components/context/authContext';
-import ReducerContext from './components/context/reducerContext';
+import ThemeContext from './context/themeContext';
+import AuthContext from './context/authContext';
+import ReducerContext from './context/reducerContext';
 import InspiringQuote from './components/InspiringQuote/InspiringQuote';
 import { reducer, initialState } from './reducer';
-import Home from './components/pages/Home/Home';
-import Hotel from './components/pages/Hotel/Hotel';
-import Search from './components/pages/Search/Search';
-import ProfileDetails from './components/pages/Profile/ProfileDetails/ProfileDetails';
-import MyHotels from './components/pages/Profile/MyHotels/MyHotels';
-import NotFound from './components/pages/404/404';
-import Login from './components/pages/Auth/Login';
-import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute';
-import ErrorBoundary from './components/hoc/ErrorBoundary';
+import Home from './pages/Home/Home';
+import Hotel from './pages/Hotel/Hotel';
+import Search from './pages/Search/Search';
+import ProfileDetails from './pages/Profile/ProfileDetails/ProfileDetails';
+import MyHotels from './pages/Profile/MyHotels/MyHotels';
+import NotFound from './pages/404/404';
+import Login from './pages/Auth/Login';
+import AuthenticatedRoute from './hoc/AuthenticatedRoute';
+import ErrorBoundary from './hoc/ErrorBoundary';
+// import AddHotel from './pages/Profile/MyHotels/AddHotel/AddHotel';
+// import Profile from './pages/Profile/Profile';
+const Profile = lazy(() => import('./pages/Profile/Profile'));
+const AddHotel = lazy(() =>
+	import('./pages/Profile/MyHotels/AddHotel/AddHotel')
+);
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -36,12 +42,26 @@ function App() {
 		<>
 			<ErrorBoundary>
 				<Routes>
+					<Route
+						path='/profil'
+						element={
+							<AuthenticatedRoute>
+								<Profile />
+							</AuthenticatedRoute>
+						}>
+						<Route path='' element={<ProfileDetails />} />
+						<Route path='hotele' element={<MyHotels />}></Route>
+					</Route>
+					<Route
+						path='profil/hotele/dodaj'
+						element={
+							<AuthenticatedRoute>
+								<AddHotel />
+							</AuthenticatedRoute>
+						}
+					/>
 					<Route path='/hotele/:id' element={<Hotel />} />
 					<Route path='/wyszukaj/:term?' element={<Search />} />
-					<Route path='/profil' element={<AuthenticatedRoute />}>
-						<Route path='' element={<ProfileDetails />} />
-						<Route path='hotele' element={<MyHotels />} />
-					</Route>
 					<Route path='/zaloguj' element={<Login />} />
 					<Route path='/' element={<Home />} end />
 					<Route path='*' element={<NotFound />} />
