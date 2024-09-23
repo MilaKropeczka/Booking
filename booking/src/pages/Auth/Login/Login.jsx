@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
+import axios from '../../../axios-auth';
 
 export default function Login() {
 	const [auth, setAuth] = useAuth();
@@ -11,22 +12,33 @@ export default function Login() {
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [valid, setValid] = useState(null);
+	const [error, setError] = useState('');
 
-	const sumbit = (e) => {
+	const sumbit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
 
-		setTimeout(() => {
-			if (true) {
-				setAuth(true);
-				navigate('/');
-			} else {
-				setValid(false);
-			}
+		try {
+			const res = await axios.post('accounts:signInWithPassword', {
+				email,
+				password,
+				returnSecureToken: true,
+			});
+			setAuth(true, {
+				email: res.data.email,
+				token: res.data.idToken,
+				userId: res.data.localId,
+			});
+			navigate('/');
+		} catch (ex) {
+			setError(ex.response.data.error.message);
 			setLoading(false);
-			setPassword('');
-		}, 500);
+		}
 	};
+
+	if (auth) {
+		navigate('/');
+	}
 
 	return (
 		<div>
@@ -55,6 +67,9 @@ export default function Login() {
 						className='form-control'
 					/>
 				</div>
+				{error ? (
+					<div className='alert alert-danger'>{error}</div>
+				) : null}
 				<div className='col-md-6 col-xl-3'>
 					<LoadingButton loading={loading}>Zaloguj</LoadingButton>
 				</div>

@@ -1,4 +1,4 @@
-import { useReducer, lazy } from 'react';
+import { useReducer, lazy, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
@@ -22,8 +22,6 @@ import Login from './pages/Auth/Login/Login';
 import AuthenticatedRoute from './hoc/AuthenticatedRoute';
 import ErrorBoundary from './hoc/ErrorBoundary';
 import Register from './pages/Auth/Register/Register';
-// import AddHotel from './pages/Profile/MyHotels/AddHotel/AddHotel';
-// import Profile from './pages/Profile/Profile';
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 const AddHotel = lazy(() =>
 	import('./pages/Profile/MyHotels/AddHotel/AddHotel')

@@ -1,14 +1,9 @@
 import style from './Menu.module.css';
 import useAuth from '../../hooks/useAuth';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Menu() {
 	const [auth, setAuth] = useAuth();
-
-	const login = (e) => {
-		e.preventDefault();
-		setAuth(true);
-	};
 
 	const logout = (e) => {
 		e.preventDefault();
@@ -56,9 +51,7 @@ function Menu() {
 							</NavLink>
 						</li>
 						<li className={style.menuItem}>
-							<a href='#section' onClick={login}>
-								Zaloguj
-							</a>
+							<NavLink to='/zaloguj'>Zaloguj</NavLink>
 						</li>
 					</>
 				)}

@@ -2,8 +2,13 @@ import { useState, useRef } from 'react';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import { validate } from '../../../helpers/validations';
 import Input from '../../../components/Input/Input';
+import useAuth from '../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import axios from '../../../axios-auth';
 
 export default function Register(props) {
+	const navigate = useNavigate();
+	const [auth, setAuth] = useAuth();
 	const [loading, setLoading] = useState(false);
 	const imageRef = useRef();
 
@@ -18,18 +23,33 @@ export default function Register(props) {
 			value: '',
 			error: '',
 			showError: false,
-			rules: ['required', { rule: 'min', length: 9 }],
+			rules: ['required', { rule: 'min', length: 3 }],
 		},
 	});
 
-	const sumbit = (e) => {
+	const [error, setError] = useState('');
+
+	const sumbit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		console.log(form);
-		console.log(imageRef.current);
-		setTimeout(() => {
+
+		try {
+			const res = await axios.post('accounts:signUp', {
+				email: form.email.value,
+				password: form.password.value,
+				returnSecureToken: true,
+			});
+
+			setAuth(true, {
+				email: res.data.email,
+				token: res.data.idToken,
+				userId: res.data.localId,
+			});
+			navigate('/');
+		} catch (ex) {
+			setError(ex.response.data.error.message);
 			setLoading(false);
-		}, 500);
+		}
 	};
 
 	const changeHandler = (value, fieldName) => {
@@ -47,6 +67,10 @@ export default function Register(props) {
 	const valid = !Object.values(form)
 		.map((input) => input.error)
 		.filter((error) => error).length;
+
+	if (auth) {
+		navigate('/');
+	}
 	return (
 		<div className='card'>
 			<div className='card-header'>Rejestracja</div>
@@ -68,6 +92,9 @@ export default function Register(props) {
 						error={form.password.error}
 						showError={form.password.showError}
 					/>
+					{error ? (
+						<div className='alert alert-danger'>{error}</div>
+					) : null}
 
 					<div className='text-end col-md-6 col-xl-4'>
 						<LoadingButton
