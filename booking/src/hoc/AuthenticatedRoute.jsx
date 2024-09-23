@@ -4,7 +4,7 @@ import ReducerContext from '../context/reducerContext';
 
 const AuthenticatedRoute = (props) => {
 	const reducer = useContext(ReducerContext);
-	if (!reducer.state.isAuthenticated) {
+	if (!reducer.state.user) {
 		return <Navigate to='/zaloguj' />;
 	}
 	return <Suspense fallback={<p>Ładowanie...</p>}>{props.children}</Suspense>;
