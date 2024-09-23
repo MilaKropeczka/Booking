@@ -15,7 +15,10 @@ export const reducer = (state, action) => {
 			throw new Error('Nie ma takiej akcji: ' + action.type);
 	}
 };
+
 export const initialState = {
+	isAuthenticated: JSON.parse(window.localStorage.getItem('token-data'))
+		? true
+		: false,
 	theme: 'danger',
-	isAuthenticated: true,
 };
