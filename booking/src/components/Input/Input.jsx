@@ -1,6 +1,8 @@
 import React from 'react';
 import InputSelect from './InputSelect/InputSelect';
 import InputText from './InputText/InputText';
+import InputPassword from './InputPassword/InputPassword';
+import InputEmail from './InputEmail/InputEmail';
 import InputCheckbox from './InputCheckbox/InputCheckbox';
 import InputFile from './InputFile/InputFile';
 import InputRadio from './InputRadio/InputRadio';
@@ -18,6 +20,10 @@ export default function Input({ type = 'text', ...props }) {
 			return <InputRadio {...props} />;
 		case 'textarea':
 			return <InputTextarea {...props} />;
+		case 'password':
+			return <InputPassword {...props} />;
+		case 'email':
+			return <InputEmail {...props} />;
 		case 'text':
 			return <InputText {...props} />;
 		default:

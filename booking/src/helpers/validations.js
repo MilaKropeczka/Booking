@@ -13,6 +13,9 @@ const availableRules = {
 			? ''
 			: `Minimum znaków: ${rule.length}`;
 	},
+	email(value) {
+		return validateEmail(value) ? '' : 'Niepoprawny email';
+	},
 };
 
 //validation

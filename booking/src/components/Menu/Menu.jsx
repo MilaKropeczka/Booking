@@ -45,11 +45,22 @@ function Menu() {
 						</li>
 					</>
 				) : (
-					<li className={style.menuItem}>
-						<a href='#section' onClick={login}>
-							Zaloguj
-						</a>
-					</li>
+					<>
+						<li className={style.menuItem}>
+							<NavLink
+								to='/rejestracja'
+								className={({ isActive }) =>
+									isActive ? style.menuItemActive : ''
+								}>
+								Zarejestruj
+							</NavLink>
+						</li>
+						<li className={style.menuItem}>
+							<a href='#section' onClick={login}>
+								Zaloguj
+							</a>
+						</li>
+					</>
 				)}
 			</ul>
 		</div>

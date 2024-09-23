@@ -18,9 +18,10 @@ import Search from './pages/Search/Search';
 import ProfileDetails from './pages/Profile/ProfileDetails/ProfileDetails';
 import MyHotels from './pages/Profile/MyHotels/MyHotels';
 import NotFound from './pages/404/404';
-import Login from './pages/Auth/Login';
+import Login from './pages/Auth/Login/Login';
 import AuthenticatedRoute from './hoc/AuthenticatedRoute';
 import ErrorBoundary from './hoc/ErrorBoundary';
+import Register from './pages/Auth/Register/Register';
 // import AddHotel from './pages/Profile/MyHotels/AddHotel/AddHotel';
 // import Profile from './pages/Profile/Profile';
 const Profile = lazy(() => import('./pages/Profile/Profile'));
@@ -63,6 +64,7 @@ function App() {
 					<Route path='/hotele/:id' element={<Hotel />} />
 					<Route path='/wyszukaj/:term?' element={<Search />} />
 					<Route path='/zaloguj' element={<Login />} />
+					<Route path='/rejestracja' element={<Register />} />
 					<Route path='/' element={<Home />} end />
 					<Route path='*' element={<NotFound />} />
 				</Routes>
