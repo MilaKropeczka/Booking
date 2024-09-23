@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import { validateEmail } from '../../../helpers/validations';
+import axios from '../../../axios-auth';
 
 export default function ProfileDetails() {
-	const [auth] = useAuth();
-
+	const [auth, setAuth] = useAuth();
 	const [email, setEmail] = useState(auth.email);
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -13,16 +13,35 @@ export default function ProfileDetails() {
 		email: '',
 		password: '',
 	});
-
+	const [success, setSuccess] = useState(false);
 	const buttonDisabled = Object.values(errors).filter((x) => x).length;
 
-	const sumbit = (e) => {
+	const sumbit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
 
-		setTimeout(() => {
-			setLoading(false);
-		}, 500);
+		try {
+			const data = {
+				idToken: auth.token,
+				email: email,
+				returnSecureToken: true,
+			};
+			if (password) {
+				data.password = password;
+			}
+			const res = await axios.post('accounts:update', data);
+			setAuth({
+				email: res.data.email,
+				token: res.data.idToken,
+				userId: res.data.localId,
+			});
+			setSuccess(true);
+		} catch (ex) {
+			// console.log(ex.response);
+			console.log(ex.response ? ex.response.data : ex.message);
+		}
+
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -44,6 +63,9 @@ export default function ProfileDetails() {
 	return (
 		<div>
 			<form onSubmit={sumbit}>
+				{success === true ? (
+					<div className='alert alert-success'>Dane zapisane</div>
+				) : null}
 				<div className='form-group col-md-6 col-xl-3'>
 					<label>Email</label>
 					<input
