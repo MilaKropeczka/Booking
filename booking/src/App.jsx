@@ -75,16 +75,15 @@ function App() {
 		<BrowserRouter>
 			<AuthContext.Provider
 				value={{
-					isAuthenticated: state.isAuthenticated,
-					login: () =>
+					user: state.user,
+					login: (user) =>
 						dispatch({
 							type: 'login',
-							isAuthenticated: true,
+							user,
 						}),
 					logout: () =>
 						dispatch({
 							type: 'logout',
-							isAuthenticated: false,
 						}),
 				}}>
 				<ThemeContext.Provider

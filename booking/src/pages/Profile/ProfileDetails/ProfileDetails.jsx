@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import { validateEmail } from '../../../helpers/validations';
 
 export default function ProfileDetails() {
-	const [auth, setAuth] = useAuth();
-	const navigate = useNavigate();
+	const [auth] = useAuth();
 
-	const [email, setEmail] = useState('milakropeczka@gmail.com');
+	const [email, setEmail] = useState(auth.email);
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [errors, setErrors] = useState({
