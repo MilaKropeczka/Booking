@@ -26,6 +26,9 @@ const Profile = lazy(() => import('./pages/Profile/Profile'));
 const AddHotel = lazy(() =>
 	import('./pages/Profile/MyHotels/AddHotel/AddHotel')
 );
+const EditHotel = lazy(() =>
+	import('./pages/Profile/MyHotels/EditHotel/EditHotel')
+);
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -56,6 +59,14 @@ function App() {
 						element={
 							<AuthenticatedRoute>
 								<AddHotel />
+							</AuthenticatedRoute>
+						}
+					/>
+					<Route
+						path='profil/hotele/edytuj/:id'
+						element={
+							<AuthenticatedRoute>
+								<EditHotel />
 							</AuthenticatedRoute>
 						}
 					/>

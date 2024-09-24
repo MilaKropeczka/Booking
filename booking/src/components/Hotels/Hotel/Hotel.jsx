@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 const propTypes = {
 	name: PropTypes.string.isRequired,
 	city: PropTypes.string.isRequired,
-	rating: PropTypes.number.isRequired,
 	description: PropTypes.string.isRequired,
 };
 
@@ -18,7 +17,9 @@ export default function Hotel(props) {
 	const theme = useContext(ThemeContext);
 
 	const clickHandler = (e) => {
-		props.onOpen(props);
+		if (props.onOpen) {
+			props.onOpen(props);
+		}
 	};
 
 	return (
@@ -41,7 +42,7 @@ export default function Hotel(props) {
 								</span>
 							</div>
 							<div className='col'>
-								<h5>Ocena: {props.rating}</h5>
+								<h5>Ocena: {props.rating ?? 0}</h5>
 								<Link
 									to={`/hotele/${props.id}`}
 									onClick={clickHandler}
@@ -56,7 +57,7 @@ export default function Hotel(props) {
 					</div>
 				</div>
 				{auth ? (
-					<p className='mt-2'>Dostępność: 4 pokoje</p>
+					<p className='mt-2'>Dostępność: {props.rooms} pokoje</p>
 				) : (
 					<p className='mt-2'>Dostępność: zaloguj</p>
 				)}
