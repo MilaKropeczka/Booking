@@ -87,7 +87,9 @@ export default function HotelForm(props) {
 	useEffect(() => {
 		const newForm = { ...form };
 		for (const key in props.hotel) {
-			newForm[key].value = props.hotel[key];
+			if (newForm[key]) {
+				newForm[key].value = props.hotel[key];
+			}
 		}
 		setForm(newForm);
 	}, [props.hotel]);
