@@ -21,7 +21,7 @@ export default function MyHotels() {
 
 	const deleteHandler = async (id) => {
 		try {
-			await axios.delete(`/hotels/${id}.json`);
+			await axios.delete(`/hotels/${id}.json?auth=${auth.token}`);
 			setHotels(hotels.filter((x) => x.id !== id));
 		} catch (error) {
 			console.log(error.response);
@@ -36,9 +36,11 @@ export default function MyHotels() {
 			{hotels ? (
 				<table className='table'>
 					<thead>
-						<th>Nazwa</th>
-						<th>Status</th>
-						<th>Opcje</th>
+						<tr>
+							<th>Nazwa</th>
+							<th>Status</th>
+							<th>Opcje</th>
+						</tr>
 					</thead>
 					<tbody>
 						{hotels.map((hotel) => (
