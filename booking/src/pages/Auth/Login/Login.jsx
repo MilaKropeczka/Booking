@@ -50,8 +50,9 @@ export default function Login() {
 			) : null}
 			<form onSubmit={sumbit}>
 				<div className='form-group col-md-6 col-xl-3'>
-					<label>Email</label>
+					<label htmlFor='email-input'>Email</label>
 					<input
+						id='email-input'
 						type='email'
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -59,8 +60,9 @@ export default function Login() {
 					/>
 				</div>
 				<div className='form-group col-md-6 col-xl-3'>
-					<label>Hasło</label>
+					<label htmlFor='password-input'>Hasło</label>
 					<input
+						id='password-input'
 						type='password'
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
