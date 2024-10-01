@@ -2,6 +2,7 @@
 	"name": "booking",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": "https://github.com/MilaKropeczka/Booking",
 	"jest": {
 		"moduleNameMapper": {
 			"^axios$": "axios/dist/node/axios.cjs"
