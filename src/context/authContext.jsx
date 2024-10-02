@@ -6,6 +6,6 @@ const AuthContext = React.createContext({
 	logout: () => {},
 });
 
-AuthContext.displayName = 'AuthContext'; //Do debuggowania React plug chrome dodaje nazwe z Context.Provider na AuthContext.Provider
+AuthContext.displayName = 'AuthContext';
 
 export default AuthContext;

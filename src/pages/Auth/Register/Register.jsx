@@ -6,11 +6,10 @@ import useAuth from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../../axios-auth';
 
-export default function Register(props) {
+export default function Register() {
 	const navigate = useNavigate();
 	const [auth, setAuth] = useAuth();
 	const [loading, setLoading] = useState(false);
-	const imageRef = useRef();
 
 	const [form, setForm] = useState({
 		email: {

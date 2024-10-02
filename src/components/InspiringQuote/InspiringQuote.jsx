@@ -18,12 +18,10 @@ export default function InspiringQuote(props) {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		/// ...pobieranie
 		setLoading(false);
 	}, []);
 
 	useLayoutEffect(() => {
-		/// nie widać przeskoku  wczytywania backendu z "wczytywanie cytatów..."
 		setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
 	}, [loading]);
 

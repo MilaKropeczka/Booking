@@ -6,7 +6,7 @@ import axios from '../../axios';
 
 export default function Search() {
 	const [hotels, setHotels] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [setLoading] = useState(true);
 	const { term } = useParams();
 
 	const search = async (searchTerm) => {

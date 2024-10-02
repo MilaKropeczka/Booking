@@ -6,7 +6,6 @@ export default function BestHotel(props) {
 	const endTime = moment().add(23, 'minutes').add(34, 'seconds');
 	const [time, setTime] = useState('');
 	const hotel = props.getHotel();
-	// let interval = null;
 	const intervalRef = useRef(null);
 
 	useEffect(() => {

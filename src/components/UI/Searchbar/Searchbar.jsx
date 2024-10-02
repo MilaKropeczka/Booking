@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import ThemeContext from '../../../context/themeContext';
 import { useNavigate } from 'react-router-dom';
 
-function Searchbar(props) {
+function Searchbar() {
 	const [term, setTerm] = useState('');
 	const theme = useContext(ThemeContext);
 	const inputRef = useRef(null);

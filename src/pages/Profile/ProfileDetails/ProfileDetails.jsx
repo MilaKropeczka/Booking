@@ -37,7 +37,6 @@ export default function ProfileDetails() {
 			});
 			setSuccess(true);
 		} catch (ex) {
-			// console.log(ex.response);
 			console.log(ex.response ? ex.response.data : ex.message);
 		}
 
