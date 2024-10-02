@@ -2,6 +2,7 @@
 	"name": "booking",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": "https://booking-b3073.web.app/",
 	"jest": {
 		"moduleNameMapper": {
 			"^axios$": "axios/dist/node/axios.cjs"
@@ -15,6 +16,7 @@
 		"@testing-library/user-event": "^13.5.0",
 		"axios": "^1.7.7",
 		"bootstrap": "^5.3.3",
+		"moment": "^2.30.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-router-dom": "^6.26.2",
@@ -25,7 +27,9 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -46,6 +50,7 @@
 		]
 	},
 	"devDependencies": {
-		"@testing-library/react": "^16.0.1"
+		"@testing-library/react": "^16.0.1",
+		"gh-pages": "^6.1.1"
 	}
 }
